@@ -13,16 +13,12 @@ import argparse
 import numpy as np
 import random
 import nvidia_smi
-import socket
 
 
 def select_GPU(min_gpu_mem_frac=0.9):
-    hostname = socket.gethostname()
     nvidia_smi.nvmlInit()
     device_count = nvidia_smi.nvmlDeviceGetCount()
     for device_index in range(device_count):
-        if device_index==1 and 'blackjack' in hostname:
-            continue
         handle = nvidia_smi.nvmlDeviceGetHandleByIndex(device_index)
         info = nvidia_smi.nvmlDeviceGetMemoryInfo(handle)
 
